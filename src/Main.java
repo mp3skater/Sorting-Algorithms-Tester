@@ -2,11 +2,17 @@ import java.util.Scanner;
 
 public class Main {
     private static int[] array;
+    private static long free_memory_before;
+    private static long free_memory_after;
 
     private static void sort() {
+        Runtime runtime = Runtime.getRuntime();
+        free_memory_before = runtime.freeMemory();
 
         // Insert code here:
 
+
+        free_memory_after = runtime.freeMemory();
     }
 
     // Method that changes two numbers in an array
@@ -27,11 +33,8 @@ public class Main {
         for (int i = 0; i < array.length-1; i++) {
             // Determine the smallest number
             int smallest = i;
-            for (int j = i; j<array.length; j++) {
-                int ne = array[j];
-                int nooo = array[smallest];
+            for (int j = i; j<array.length; j++)
                 smallest = array[j]<array[smallest]? j : smallest;
-            }
 
             // Replace it with the last one
             swap(i, smallest);
@@ -56,9 +59,9 @@ public class Main {
 
         // Measure the time of your algorithm
         long startTime = System.currentTimeMillis();
-        exampleSort();
+        sort();
         long endTime = System.currentTimeMillis();
-        System.out.println((name != null ? name : "Unnamed Algorithm") + ": " + (endTime - startTime) + " ms");
+        System.out.println(name+": " +(endTime - startTime)+" ms and "+(free_memory_after-free_memory_before)/1000+" Kb");
 
         // Testing if the algorithm has worked correctly
         int temp = array[0];
